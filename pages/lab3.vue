@@ -1,58 +1,59 @@
 <template>
-  <main class="p-8 min-h-screen ">
-    <div class="flex gap-4 mb-8 justify-center">
-      <label><input class="mx-2" type="radio" value="one" v-model="selectedpic">Breaking Bad</label>
-      <label><input class="mx-2" type="radio" value="two" v-model="selectedpic">Dexter</label>
-      <label><input class="mx-2" type="radio" value="three" v-model="selectedpic">Game of thrones</label>
+  <main class="p-4 sm:p-8 min-h-screen w-auto">
+    <div class="flex flex-col sm:flex-row gap-4 mb-8 justify-center items-center">
+      <label class="flex items-center"><input class="mx-2" type="radio" value="one" v-model="selectedpic">Breaking Bad</label>
+      <label class="flex items-center"><input class="mx-2" type="radio" value="two" v-model="selectedpic">Dexter</label>
+      <label class="flex items-center"><input class="mx-2" type="radio" value="three" v-model="selectedpic">Game of thrones</label>
     </div>
 
     <div class="flex justify-center mb-8">
       <div class="blockcap" v-if="selectedpic == 'one'">
-        <img :src="pic1.image" class="w-60 h-68 pt-2">
-        <p class=" text-xl">{{ pic1.name }}</p>
+        <img :src="pic1.image" class="w-full max-w-60 h-auto pt-2">
+        <p class="text-xl text-center">{{ pic1.name }}</p>
       </div>
       <div class="blockcap" v-if="selectedpic == 'two'">
-        <img :src="pic2.image" class="w-60 h-68 pt-2">
-        <p class=" text-xl">{{ pic2.name }}</p>
+        <img :src="pic2.image" class="w-full max-w-60 h-auto pt-2">
+        <p class="text-xl text-center">{{ pic2.name }}</p>
       </div>
       <div class="blockcap" v-if="selectedpic == 'three'">
-        <img :src="pic3.image" class="w-60 h-68 pt-2">
-        <p class=" text-xl">{{ pic3.name }}</p>
+        <img :src="pic3.image" class="w-full max-w-60 h-auto pt-2">
+        <p class="text-xl text-center">{{ pic3.name }}</p>
       </div>
     </div>
-    <div class="flex justify-center gap-4 mb-8" v-if="!['one','two','three'].includes(selectedpic)">
-      <div class="blockcap" @click="selectedpic = 'one'"> 
-        <img :src="pic1.image" class="w-60 h-68 pt-2">
-        <p class=" text-xl">{{ pic1.name }}</p>
+    
+    <div class="flex flex-col max-sm:gap-6 sm:flex-row justify-center gap-4 mb-8" v-if="!['one','two','three'].includes(selectedpic)">
+      <div class="blockcap max-sm:w-full" @click="selectedpic = 'one'"> 
+        <img :src="pic1.image" class="w-full max-w-60 h-auto pt-2">
+        <p class="text-xl text-center">{{ pic1.name }}</p>
       </div>
-      <div class="blockcap" @click="selectedpic = 'two'"> 
-        <img :src="pic2.image" class="w-60 h-68 pt-2">
-        <p class=" text-xl">{{ pic2.name }}</p>
+      <div class="blockcap max-sm:w-full" @click="selectedpic = 'two'"> 
+        <img :src="pic2.image" class="w-full max-w-60 h-auto pt-2">
+        <p class="text-xl text-center">{{ pic2.name }}</p>
       </div>
-      <div class="blockcap" @click="selectedpic = 'three'"> 
-        <img :src="pic3.image" class="w-60 h-68 pt-2">
-        <p class=" text-xl">{{ pic3.name }}</p>    
-      </div>
-
-    </div>
-    <div class="flex flex-wrap gap-4 justify-center" v-if="selectedpic == 'one'">
-      <div class="blockfor" v-for="(pic, index) in breakingbad" :key="index">
-        <img :src="pic.image" class="w-60 h-68 pt-2">
-        <p class=" text-xl">{{ pic.name }}</p>
+      <div class="blockcap max-sm:w-full" @click="selectedpic = 'three'"> 
+        <img :src="pic3.image" class="w-full max-w-60 h-auto pt-2">
+        <p class="text-xl text-center">{{ pic3.name }}</p>    
       </div>
     </div>
-
-    <div class="flex flex-wrap gap-4 justify-center" v-if="selectedpic == 'two'">
-      <div class="blockfor" v-for="(pic, index) in dexterr" :key="index">
-        <img :src="pic.image" class="w-60 h-68 pt-2">
-        <p class=" text-xl">{{ pic.name }}</p>
+    
+    <div class="flex flex-col max-sm:gap-6 sm:flex-row sm:flex-wrap gap-4 justify-center" v-if="selectedpic == 'one'">
+      <div class="blockfor max-sm:w-full" v-for="(pic, index) in breakingbad" :key="index">
+        <img :src="pic.image" class="w-full max-w-60 h-auto pt-2">
+        <p class="text-xl text-center">{{ pic.name }}</p>
       </div>
     </div>
 
-    <div class="flex flex-wrap gap-4 justify-center" v-if="selectedpic == 'three'">
-      <div class="blockfor" v-for="(pic, index) in goth" :key="index">
-        <img :src="pic.image" class="w-60 h-68 pt-2">
-        <p class=" text-xl">{{ pic.name }}</p>
+    <div class="flex flex-col max-sm:gap-6 sm:flex-row sm:flex-wrap gap-4 justify-center" v-if="selectedpic == 'two'">
+      <div class="blockfor max-sm:w-full" v-for="(pic, index) in dexterr" :key="index">
+        <img :src="pic.image" class="w-full max-w-60 h-auto pt-2">
+        <p class="text-xl text-center">{{ pic.name }}</p>
+      </div>
+    </div>
+
+    <div class="flex flex-col max-sm:gap-6 sm:flex-row sm:flex-wrap gap-4 justify-center" v-if="selectedpic == 'three'">
+      <div class="blockfor max-sm:w-full" v-for="(pic, index) in goth" :key="index">
+        <img :src="pic.image" class="w-full max-w-60 h-auto pt-2">
+        <p class="text-xl text-center">{{ pic.name }}</p>
       </div>
     </div>
   </main>
@@ -105,10 +106,10 @@ const selectedpic = ref<string>('')
 
 <style scoped>
 .blockcap {
-  @apply flex flex-col gap-4 border-gray-600 border-2 transition-all duration-300 text-white hover:text-black bg-black w-72 h-auto items-center hover:border-blue-300 hover:border-4 hover:bg-blue-200 rounded-xl;
+  @apply flex flex-col gap-4 border-gray-600 border-2 transition-all duration-300 text-white hover:text-black bg-black w-72 max-sm:w-full max-sm:max-w-[480px] h-auto items-center hover:border-blue-300 hover:border-4 hover:bg-blue-200 rounded-xl;
 }
 
 .blockfor {
-  @apply flex flex-col gap-4 border-gray-300 border transition-all duration-300 text-white hover:text-black bg-gray-800 w-72 h-auto items-center hover:border-blue-300 hover:border-4 hover:bg-blue-400 rounded-xl;
+  @apply flex flex-col gap-4 border-gray-300 border transition-all duration-300 text-white hover:text-black bg-gray-800 w-72 max-sm:w-full max-sm:max-w-[480px] h-auto items-center hover:border-blue-300 hover:border-4 hover:bg-blue-400 rounded-xl;
 }
 </style>
