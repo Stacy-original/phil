@@ -64,7 +64,7 @@
         </div>
     </header>
 
-    <main class="p-5 flex bg-gradient-to-tr from-gray-600 to-blue-200 h-screen">
+    <main class="p-5 flex bg-gradient-to-tr from-gray-600 justify-center to-blue-200 min-h-screen">
         <slot/>
     </main>
 
