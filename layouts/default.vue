@@ -1,6 +1,6 @@
 <template>
     <body class="nav-color overscroll-none "></body>
-    <header class="nav-color flex flex-row w-full relative max-sm:justify-between max-sm:relative">
+    <header class="bg-gray-950 border-gray-100 flex flex-row w-full relative border-b max-sm:justify-between max-sm:relative">
       <!-- Sidebar Starts -->
 
        <!-- sidebar button -->
@@ -13,7 +13,7 @@
       </div>
         
         <!-- Sidebar guts -->
-        <div v-show="sidebar" class="flex flex-col h-screen top-[64px] left-0 side-color text-white w-64 absolute text-center transition-all duration-300 ease-in-out max-sm:absolute max-sm:top-16 max-sm:left-0 max-sm:w-full max-sm:h-[calc(100vh-64px)] max-sm:z-40 shadow-xl">
+        <div v-show="sidebar" class="flex flex-col min-h-screen top-[64px] left-0 bg-gray-800 border-gray-100s text-white border-t w-64 absolute text-center transition-all duration-300 ease-in-out max-sm:absolute max-sm:top-16 max-sm:left-0 max-sm:w-full max-sm:h-[calc(100vh-64px)] max-sm:z-40 shadow-xl">
           <!-- Search Bar - Mobile Version -->
           <div class="p-4 border-b border-gray-700 max-sm:block hidden">
             <div class="relative">
@@ -43,7 +43,7 @@
 
             <div class="relative side-butt flex items-center justify-start gap-3 px-4 py-3 rounded-xl transition-all duration-300 group cursor-pointer select-none"
                 :class="{'bg-blue-600 shadow-lg scale-[1.02] border-l-4 border-blue-400': submenu, 'hover:bg-gray-800 hover:scale-[1.02] border-l-4 border-transparent': !submenu}"
-                @click="switch_submenu" role="button" tabindex="0">
+                @click="switch_submenu" @mouseenter="submenu = true" @mouseleave="closeWithDelay2" role="button" tabindex="0">
               <svg class="w-5 h-5 transition-transform duration-300" :class="{'rotate-90 scale-110': submenu, 'group-hover:scale-110': !submenu}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
               </svg>
@@ -53,10 +53,10 @@
               </svg>
             </div>
             
-            <!-- Slide Down -->
-            <div class="transition-all duration-500 ease-out overflow-hidden bg-gray-900 bg-opacity-50"
-                :class="{'max-h-0': !submenu, 'max-h-64': submenu}" >
-              <div class="flex flex-col bg-gray-900 border-gray-600 text-center space-y-1 py-2 px-3" @mouseleave="closeWithDelay">
+            <!-- submenu -->
+            <div class="transition-all duration-500 ease-out overflow-hidden bg-gray-900 bg-opacity-50 select-none"
+                :class="{'max-h-0': !submenu, 'max-h-64': submenu}" @mouseleave="closeWithDelay" @mouseenter="cancelClose" >
+              <div class="flex flex-col bg-gray-900 border-gray-600 text-center space-y-1 py-2 px-3" >
                 <NuxtLink to="/lab3" @click="sidebar = false; burger = false" 
                           class="relative group flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-md hover:scale-[1.02] hover:translate-x-2 border-l-2 border-transparent hover:border-blue-300">
                   <div class="w-2 h-2 bg-blue-400 rounded-full transition-transform duration-300 group-hover:scale-150"></div>
@@ -141,13 +141,13 @@
         </div>
         
         <!-- Account Button  -->
-        <div class="flex-1 flex mr-5 justify-end items-center pr-4 max-sm:pr-2 relative" @mouseleave="closeWithDelayacc">
+        <div class="flex-1 flex mr-5 justify-end items-center pr-4 max-sm:pr-2 relative" @mouseleave="closeWithDelayacc" @mouseenter="cancelClose">
           <div class="self-center rounded-full hover:bg-gray-500 w-12 h-12 hover:bg-opacity-20 transition-colors duration-200 flex items-center justify-center select-none" role="button" tabindex="0" @click="switch_accountmenu">
             <img src="assets/images/user.png" class="w-8 h-8 rounded-full" alt="Account">
           </div>
 
           <!-- Account Menu -->
-          <div v-show="accountmenu" class="absolute top-16 right-4 side-color text-white w-64 rounded-lg shadow-xl z-50 border border-gray-600">
+          <div v-show="accountmenu" class="absolute top-16 mt-0.5 right-4 side-color text-white w-64 rounded-lg shadow-xl z-50 border border-gray-600">
             <div class="p-4 border-b border-gray-700">
               <div class="flex items-center gap-3">
                 <img src="assets/images/user.png" class="w-10 h-10 rounded-full" alt="User">
@@ -183,21 +183,13 @@
             </div>
           </div>
         </div>
-    
-        
-
-
-
-
-
-        
     </header>
 
-    <main class="flex-1 bg-gradient-to-tr from-gray-600 justify-center to-blue-200 max-sm:duration-300 max-sm:transition-all min-h-screen transition-all duration-300" :class="{'ml-64': sidebar, 'max-sm:ml-0': !sidebar}">
+    <main class="flex-1 text-white bg-gradient-to-tr from-gray-900 justify-center to-gray-900 max-sm:duration-300 max-sm:transition-all min-h-screen transition-all duration-300" :class="{'ml-64': sidebar, 'max-sm:ml-0': !sidebar}">
     <slot/>
     </main>
 
-    <footer class="flex flex-row w-full nav-color border-t-2 items-center justify-center px-4 py-2 gap-4">
+    <footer class="flex flex-row w-full nav-color border-t items-center justify-center px-4 py-2 gap-4">
         <a href="https://github.com/"><img src="assets/images/github.png" class="w-8 h-8"></a>
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="assets/images/youtube.png" class="w-8 h-8"></a>
         <a href="https://www.facebook.com/"><img src="assets/images/facebook.png" class="w-8 h-8"></a>
@@ -244,13 +236,14 @@ const switch_accountmenu = () => {accountmenu.value=!accountmenu.value}
 
 let closeTimeout: ReturnType<typeof setTimeout> | null = null;
 const closeWithDelayacc = () => {closeTimeout = setTimeout(() => {accountmenu.value = false; }, 400);}; // delay in ms
-const closeWithDelay = () => {closeTimeout = setTimeout(() => {submenu.value = false; }, 300);};
+const closeWithDelay = () => {closeTimeout = setTimeout(() => {submenu.value = false; }, 400);};
+const closeWithDelay2 = () => {closeTimeout = setTimeout(() => {submenu.value = false; }, 100);};
 const cancelClose = () => {if (closeTimeout) {clearTimeout(closeTimeout);closeTimeout = null;}};
 
 </script>
 <style scoped>
   .nav-color{
-    @apply bg-gray-950 border-gray-600;
+    @apply bg-gray-950 border-gray-100;
   }
   .side-color{
     @apply bg-gray-800 border-gray-600

@@ -1,6 +1,6 @@
 <template>
-    <main class=" justify-center w-full items-center">
-        <div class="justify-center items-center">
+    <main class=" flex flex-col w-full items-center justify-center">
+        <div>
         Homepage
         </div>
     </main>
