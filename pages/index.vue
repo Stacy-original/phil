@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <main class=" justify-center w-full items-center">
+        <div class="justify-center items-center">
         Homepage
-    </div>
+        </div>
+    </main>
 </template>

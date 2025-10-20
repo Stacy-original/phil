@@ -1,74 +1,203 @@
 <template>
-    <body class="overscroll-none bg-black"></body>
-    <header class="flex flex-row w-full relative bg-black border-b-2  border-gray-600 max-sm:justify-between max-sm:relative " >
-        <div class="basis-1/4 items-center justify-start px-8 min-w-40 max-sm:basis-auto select-none">
-            <img src="assets\images\kasyakbg.png" class="w-32 h-16 transparent ">
-        </div>
-        <div class="basis-1/4 max-sm:basis-auto">
-        </div>
+    <body class="nav-color overscroll-none "></body>
+    <header class="nav-color flex flex-row w-full relative max-sm:justify-between max-sm:relative">
+      <!-- Sidebar Starts -->
 
-
-        <!-- burger -->
-        <nav :class="{'basis-1/2 flex flex-row items-center justify-end px-8 gap-4': true,
-        'max-sm:basis-auto max-sm:absolute max-sm:top-full max-sm:w-full max-sm:justify-center max-sm:flex-col max-sm:gap-0 max-sm:bg-black max-sm:px-0 max-sm:border-2 border-gray-600': burger,  
-        'max-sm:hidden': !burger}" class="bg-black text-white select-none">
-
-        <NuxtLink to="/" @click="burger = false" class="my-auto p-2 hover:bg-blue-200 hover:text-black rounded-lg max-sm:rounded-none transition-all 
-        duration-300 max-sm:w-full max-sm:border-b-2 max-sm:border-gray-600 max-sm:text-center cursor-pointer select-none"> Home </NuxtLink>  
-            
-            <div class="relative my-auto p-2 hover:bg-blue-200 hover:text-black  rounded-lg max-sm:rounded-none transition-all duration-300 max-sm:w-full 
-            max-sm:text-center max-sm:border-b-2 max-sm:border-gray-600 cursor-pointer select-none"
-            :class="{'hover:bg-blue-200 hover:text-black  hover:rounded-lg max-sm:hover:rounded-none': true,'bg-gray-600 text-white rounded-lg max-sm:rounded-none': submenu}
-            "@click="switch_submenu" @mouseleave="closeWithDelay"  @mouseenter="cancelClose" role="button" tabindex="0">Labs
-            
-                <div v-show="submenu" class="flex flex-col absolute top-full bg-black text-white w-56 mt-3 text-center border-2 border-gray-600 shadow-lg
-                 max-sm:relative max-sm:w-full max-sm:text-white max-sm:border-t max-sm:border-black">
-
-                <NuxtLink to="/lab3" @click="burger = false" class="relative group p-2 overflow-hidden transition-all sm:border-b-2 sm:border-gray-600 max-sm:border-b-2 max-sm:border-gray-600 duration-500 text-white hover:text-black"><span class="relative z-10">Lab 3</span> 
-                <span class="absolute inset-0 bg-blue-200 scale-x-0 origin-center transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
-                </NuxtLink>
-                <NuxtLink to="/lab4" @click="burger = false" class="relative group p-2 overflow-hidden transition-all sm:border-b-2 sm:border-gray-600 max-sm:border-b-2 max-sm:border-gray-600 duration-500 text-white hover:text-black"><span class="relative z-10">Lab 4</span> 
-                <span class="absolute inset-0 bg-blue-200 scale-x-0 origin-center transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
-                </NuxtLink>
-                <NuxtLink to="/lab5" @click="burger = false" class="relative group p-2 overflow-hidden transition-all sm:border-b-2 sm:border-gray-600 max-sm:border-b-2 max-sm:border-gray-600 duration-500 text-white hover:text-black"><span class="relative z-10">Lab 5</span> 
-                <span class="absolute inset-0 bg-blue-200 scale-x-0 origin-center transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
-                </NuxtLink>
-                <NuxtLink to="/lab6" @click="burger = false" class="relative group p-2 overflow-hidden transition-all duration-500 text-white hover:text-black"><span class="relative z-10">Lab 6</span> 
-                <span class="absolute inset-0 bg-blue-200 scale-x-0 origin-center transition-transform duration-500 ease-out group-hover:scale-x-100"></span>
-                </NuxtLink>
-
-                </div>
-
+       <!-- sidebar button -->
+      <div class="self-center rounded-full hover:bg-gray-500 w-14 ml-3 h-12 hover:bg-opacity-20 transition-colors duration-200 flex items-center justify-center select-none max-sm:z-50" role="button" tabindex="0" @click="switch_sidebar">
+          <div class="flex flex-col justify-between items-center w-6 h-4">
+            <span class="h-[2px] w-full bg-white transition-all duration-300" :class="{'rotate-45 translate-y-[7px]': sidebar}"></span>
+            <span class="h-[2px] w-full bg-white transition-all duration-300" :class="{'opacity-0': sidebar}"></span>
+            <span class="h-[2px] w-full bg-white transition-all duration-300" :class="{' -rotate-45 -translate-y-[7px]': sidebar}"></span>
+          </div>
+      </div>
+        
+        <!-- Sidebar guts -->
+        <div v-show="sidebar" class="flex flex-col h-screen top-[64px] left-0 side-color text-white w-64 absolute text-center transition-all duration-300 ease-in-out max-sm:absolute max-sm:top-16 max-sm:left-0 max-sm:w-full max-sm:h-[calc(100vh-64px)] max-sm:z-40 shadow-xl">
+          <!-- Search Bar - Mobile Version -->
+          <div class="p-4 border-b border-gray-700 max-sm:block hidden">
+            <div class="relative">
+              <input 
+                type="text" 
+                placeholder="Search..." 
+                class="w-full px-4 py-2 pl-10 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-100 focus:border-transparent"
+              >
+              <svg class="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
             </div>
+          </div>
+          
+          <div class="pt-2 border-gray-700"></div>
 
-        <NuxtLink to="/login" @click="burger = false" class="my-auto p-2 hover:bg-blue-200 hover:text-black rounded-lg max-sm:rounded-none
-         transition-all duration-300 max-sm:w-full max-sm:border-b-2 max-sm:border-gray-600 max-sm:text-center cursor-pointer select-none">Log in</NuxtLink>
+          <!-- Home menu -->
+          <NuxtLink to="/" @click="sidebar = false" class="side-butt side-butt-mobile flex items-center justify-start gap-3 px-4 py-3 mx-3 mt-3 rounded-xl transition-all duration-300 group hover:bg-blue-600 hover:shadow-lg hover:scale-[1.02] border-l-4 border-transparent hover:border-blue-400 max-sm:border-b max-sm:border-gray-600 max-sm:rounded-none max-sm:mx-0">
+          <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
+          </svg>
+          <span class="font-medium transition-all duration-300 group-hover:translate-x-1">Home</span>
+        </NuxtLink>
 
-        <NuxtLink to="/logout" @click="burger = false" class="my-auto p-2 hover:bg-blue-200 hover:text-black rounded-lg max-sm:rounded-none
-         transition-all duration-300 max-sm:w-full  max-sm:text-center cursor-pointer select-none">Log out</NuxtLink> 
+        <!-- Lab menu -->
+          <div class="side-butt-mobile mt-2 rounded-xl overflow-hidden max-sm:mx-0 max-sm:border-b max-sm:border-gray-600 max-sm:rounded-none">
 
-        </nav>
+            <div class="relative side-butt flex items-center justify-start gap-3 px-4 py-3 rounded-xl transition-all duration-300 group cursor-pointer select-none"
+                :class="{'bg-blue-600 shadow-lg scale-[1.02] border-l-4 border-blue-400': submenu, 'hover:bg-gray-800 hover:scale-[1.02] border-l-4 border-transparent': !submenu}"
+                @click="switch_submenu" role="button" tabindex="0">
+              <svg class="w-5 h-5 transition-transform duration-300" :class="{'rotate-90 scale-110': submenu, 'group-hover:scale-110': !submenu}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+              </svg>
+              <span class="font-medium transition-all duration-300" :class="{'translate-x-1': submenu, 'group-hover:translate-x-1': !submenu}">Labs</span>
+              <svg class="w-4 h-4 ml-auto transition-transform duration-300" :class="{'rotate-180': submenu}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+              </svg>
+            </div>
+            
+            <!-- Slide Down -->
+            <div class="transition-all duration-500 ease-out overflow-hidden bg-gray-900 bg-opacity-50"
+                :class="{'max-h-0': !submenu, 'max-h-64': submenu}" >
+              <div class="flex flex-col bg-gray-900 border-gray-600 text-center space-y-1 py-2 px-3" @mouseleave="closeWithDelay">
+                <NuxtLink to="/lab3" @click="sidebar = false; burger = false" 
+                          class="relative group flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-md hover:scale-[1.02] hover:translate-x-2 border-l-2 border-transparent hover:border-blue-300">
+                  <div class="w-2 h-2 bg-blue-400 rounded-full transition-transform duration-300 group-hover:scale-150"></div>
+                  <span class="font-medium">Lab 3</span>
+                  <span class="nav-span rounded-lg"></span>
+                </NuxtLink>
+                <NuxtLink to="/lab4" @click="sidebar = false; burger = false" 
+                          class="relative group flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-md hover:scale-[1.02] hover:translate-x-2 border-l-2 border-transparent hover:border-blue-300">
+                  <div class="w-2 h-2 bg-blue-400 rounded-full transition-transform duration-300 group-hover:scale-150"></div>
+                  <span class="font-medium">Lab 4</span>
+                  <span class="nav-span rounded-lg"></span>
+                </NuxtLink>
+                <NuxtLink to="/lab5" @click="sidebar = false; burger = false" 
+                          class="relative group flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-md hover:scale-[1.02] hover:translate-x-2 border-l-2 border-transparent hover:border-blue-300">
+                  <div class="w-2 h-2 bg-blue-400 rounded-full transition-transform duration-300 group-hover:scale-150"></div>
+                  <span class="font-medium">Lab 5</span>
+                  <span class="nav-span rounded-lg"></span>
+                </NuxtLink>
+                <NuxtLink to="/lab6" @click="sidebar = false; burger = false" 
+                          class="relative group flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-md hover:scale-[1.02] hover:translate-x-2 border-l-2 border-transparent hover:border-blue-300">
+                  <div class="w-2 h-2 bg-blue-400 rounded-full transition-transform duration-300 group-hover:scale-150"></div>
+                  <span class="font-medium">Lab 6</span>
+                  <span class="nav-span rounded-lg"></span>
+                </NuxtLink>
+              </div>
+            </div>
+          </div>
+          <!-- Login -->
+          <div class="transition-all duration-500 ease-out overflow-hidden mt-2 max-sm:mx-0"
+              :class="{'max-h-0': submenu, 'max-h-40': !submenu}">
+            <NuxtLink to="/login" @click="sidebar = false" 
+                      class="side-butt side-butt-mobile flex items-center justify-start gap-3 px-4 py-3 rounded-xl transition-all duration-300 group hover:bg-green-600 hover:shadow-lg hover:scale-[1.02] border-l-4 border-transparent hover:border-green-400 max-sm:border-b max-sm:border-gray-600 max-sm:rounded-none">
+              <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+              </svg>
+              <span class="font-medium transition-all duration-300 group-hover:translate-x-1">Log in</span>
+            </NuxtLink>
+            <!-- logout -->
+            <NuxtLink to="/logout" @click="sidebar = false" 
+                      class="side-butt side-butt-mobile flex items-center justify-start gap-3 px-4 py-3 rounded-xl transition-all duration-300 group hover:bg-red-600 hover:shadow-lg hover:scale-[1.02] border-l-4 border-transparent hover:border-red-400 max-sm:border-b max-sm:border-gray-600 max-sm:rounded-none mt-2">
+              <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+              </svg>
+              <span class="font-medium transition-all duration-300 group-hover:translate-x-1">Log out</span>
+            </NuxtLink>
+          </div>
 
-
-
-
-        <div v-if="!burger" @click="switch_burger" class=" max-sm:flex max-sm:flex-col max-sm:mr-8 max-sm:justify-between max-sm:items-center max-sm:w-8 max-sm:h-6 self-center">
-            <span class="h-[3px] w-full bg-white"></span>
-            <span class="h-[3px] w-full bg-white"></span>
-            <span class="h-[3px] w-full bg-white"></span>
+          <div class="mt-auto py-6 border-t-2 border-gray-700 bg-gray-900 bg-opacity-50 max-sm:border-t max-sm:border-gray-600">
+            <div class="text-sm text-gray-400 flex flex-col items-center gap-1">
+              <div class="flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                <span>© 2025 KASYAK</span>
+              </div>
+              <div class="text-xs text-gray-500">All rights reserved</div>
+            </div>
+          </div>
         </div>
-        <div v-else class=" max-sm:flex max-sm:flex-col max-sm:mr-8 max-sm:justify-between max-sm:items-center max-sm:w-8 max-sm:h-6 self-center" @click="switch_burger">
-            <span class="h-[3px] w-full bg-white rotate-45 relative top-[9px]"></span>
-            <span class="h-[3px] w-full bg-white opacity-0"></span>
-            <span class="h-[3px] w-full bg-white relative bottom-3 rotate-[-45deg]"></span>
+        <!-- Sidebar ENDS -->
+
+
+               <!-- Logo Section - Adjusted for better spacing -->
+        <div class="flex-1 flex items-center justify-start px-8 max-sm:px-4 max-sm:flex-initial select-none">
+            <NuxtLink to="/"><img src="assets\images\kasyakbg.png" class="w-32 h-16 transparent "></NuxtLink>
         </div>
+        
+        <!-- Search Bar Desktop  -->
+        <div class="flex-1 mt-2.5 flex justify-center max-sm:hidden">
+          <div class="max-w-md w-full">
+            <div class="relative">
+              <input 
+                type="text" 
+                placeholder="Search..." 
+                class="w-full px-4 py-2 pl-10 rounded-lg bg-gray-800 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-100 focus:border-transparent"
+              >
+              <svg class="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Account Button  -->
+        <div class="flex-1 flex mr-5 justify-end items-center pr-4 max-sm:pr-2 relative" @mouseleave="closeWithDelayacc">
+          <div class="self-center rounded-full hover:bg-gray-500 w-12 h-12 hover:bg-opacity-20 transition-colors duration-200 flex items-center justify-center select-none" role="button" tabindex="0" @click="switch_accountmenu">
+            <img src="assets/images/user.png" class="w-8 h-8 rounded-full" alt="Account">
+          </div>
+
+          <!-- Account Menu -->
+          <div v-show="accountmenu" class="absolute top-16 right-4 side-color text-white w-64 rounded-lg shadow-xl z-50 border border-gray-600">
+            <div class="p-4 border-b border-gray-700">
+              <div class="flex items-center gap-3">
+                <img src="assets/images/user.png" class="w-10 h-10 rounded-full" alt="User">
+                <div class="flex-1 min-w-0">
+                  <p class="font-medium truncate">Guest User</p>
+                  <p class="text-sm text-gray-400 truncate">Not logged in</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="p-2">
+              <NuxtLink to="/login" @click="accountmenu = false" 
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-600 hover:shadow-md group">
+                <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                </svg>
+                <span class="font-medium">Log in</span>
+              </NuxtLink>
+              
+              <NuxtLink to="/logout" @click="accountmenu = false" 
+                        class="flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-gray-600 hover:shadow-md group mt-1">
+                <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                </svg>
+                <span class="font-medium">Log out</span>
+              </NuxtLink>
+            </div>
+            
+            <div class="p-3 border-t border-gray-700 bg-gray-900 bg-opacity-50">
+              <div class="text-xs text-gray-400 text-center">
+                <p>Account Settings</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        
+
+
+
+
+
+        
     </header>
 
-    <main class="p-5 flex bg-gradient-to-tr from-gray-600 justify-center to-blue-200 min-h-screen">
-        <slot/>
+    <main class="flex-1 bg-gradient-to-tr from-gray-600 justify-center to-blue-200 max-sm:duration-300 max-sm:transition-all min-h-screen transition-all duration-300" :class="{'ml-64': sidebar, 'max-sm:ml-0': !sidebar}">
+    <slot/>
     </main>
 
-    <footer class="flex flex-row w-full bg-black border-t-2 border-gray-600 items-center justify-center px-4 py-2 gap-4">
+    <footer class="flex flex-row w-full nav-color border-t-2 items-center justify-center px-4 py-2 gap-4">
         <a href="https://github.com/"><img src="assets/images/github.png" class="w-8 h-8"></a>
         <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"><img src="assets/images/youtube.png" class="w-8 h-8"></a>
         <a href="https://www.facebook.com/"><img src="assets/images/facebook.png" class="w-8 h-8"></a>
@@ -104,11 +233,55 @@ useHead({
 
 const burger = ref<boolean>(false);
 const submenu = ref<boolean>(false);
+const sidebar = ref<boolean>(false);
+const accountmenu =ref<boolean>(false);
 
 const switch_burger = () => {burger.value = !burger.value;};
 const switch_submenu = () => {submenu.value = !submenu.value;};
+const switch_sidebar = () => {sidebar.value =!sidebar.value};
+const switch_accountmenu = () => {accountmenu.value=!accountmenu.value}
+
 
 let closeTimeout: ReturnType<typeof setTimeout> | null = null;
-const closeWithDelay = () => {closeTimeout = setTimeout(() => {submenu.value = false; }, 400);}; // delay in ms
+const closeWithDelayacc = () => {closeTimeout = setTimeout(() => {accountmenu.value = false; }, 400);}; // delay in ms
+const closeWithDelay = () => {closeTimeout = setTimeout(() => {submenu.value = false; }, 300);};
 const cancelClose = () => {if (closeTimeout) {clearTimeout(closeTimeout);closeTimeout = null;}};
+
 </script>
+<style scoped>
+  .nav-color{
+    @apply bg-gray-950 border-gray-600;
+  }
+  .side-color{
+    @apply bg-gray-800 border-gray-600
+  }
+  .nav-submenu {
+    @apply p-2 overflow-hidden transition-all border-gray-600 duration-500 text-white hover:text-black ;
+  }
+  .nav-butt {
+    @apply  my-auto p-2 hover:bg-blue-200 hover:text-black rounded-lg transition-all duration-300 border-gray-600  cursor-pointer select-none;
+  }
+  .nav-butt-mobile {
+    @apply max-sm:border-b-2 max-sm:border-r-2 max-sm:border-l-2 max-sm:w-full max-sm:text-center ;
+  }
+
+  .side-butt {
+    @apply  ml-2 mr-2 h-12 text-center text-xl pt-2 p-2 hover:bg-gray-500 hover:bg-opacity-50 hover:text-white rounded-lg transition-all duration-300 border-gray-600  cursor-pointer select-none;
+  }
+  .side-butt-mobile {
+    @apply  max-sm:text-center;
+  }
+  .nav-span {
+    @apply absolute inset-0 bg-blue-200 scale-x-0 origin-center transition-transform duration-500 ease-out group-hover:scale-x-100;
+  }
+  .account-menu-enter-active,
+  .account-menu-leave-active {
+    transition: all 0.3s ease;
+  }
+
+  .account-menu-enter-from,
+  .account-menu-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+</style>
