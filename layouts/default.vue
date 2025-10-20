@@ -43,7 +43,7 @@
 
             <div class="relative side-butt flex items-center justify-start gap-3 px-4 py-3 rounded-xl transition-all duration-300 group cursor-pointer select-none"
                 :class="{'bg-blue-600 shadow-lg scale-[1.02] border-l-4 border-blue-400': submenu, 'hover:bg-gray-800 hover:scale-[1.02] border-l-4 border-transparent': !submenu}"
-                @click="switch_submenu" @mouseenter="submenu = true" @mouseleave="closeWithDelay2" role="button" tabindex="0">
+                @click="switch_submenu" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave" role="button" tabindex="0">
               <svg class="w-5 h-5 transition-transform duration-300" :class="{'rotate-90 scale-110': submenu, 'group-hover:scale-110': !submenu}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
               </svg>
@@ -236,9 +236,17 @@ const switch_accountmenu = () => {accountmenu.value=!accountmenu.value}
 
 let closeTimeout: ReturnType<typeof setTimeout> | null = null;
 const closeWithDelayacc = () => {closeTimeout = setTimeout(() => {accountmenu.value = false; }, 400);}; // delay in ms
-const closeWithDelay = () => {closeTimeout = setTimeout(() => {submenu.value = false; }, 400);};
+const closeWithDelay = () => {closeTimeout = setTimeout(() => {submenu.value = false; }, 350);};
 const closeWithDelay2 = () => {closeTimeout = setTimeout(() => {submenu.value = false; }, 100);};
 const cancelClose = () => {if (closeTimeout) {clearTimeout(closeTimeout);closeTimeout = null;}};
+
+
+let openTimeout: ReturnType<typeof setTimeout> | null = null;
+const openWithDelay = () => {openTimeout = setTimeout(() => {submenu.value = true; }, 150);};
+const cancelOpen = () => {if (openTimeout) {clearTimeout(openTimeout);openTimeout = null;}};
+
+const handleMouseLeave = () => {if (submenu.value) {closeWithDelay();} else {cancelOpen();}};
+const handleMouseEnter = () => {cancelClose();openWithDelay();};
 
 </script>
 <style scoped>

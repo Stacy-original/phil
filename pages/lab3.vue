@@ -1,7 +1,7 @@
 <template>
   <main class="p-4   min-h-screen">
     <div class="flex gap-4 mb-8 justify-center">
-      <label><input class="mx-2 " type="radio" value="none" v-model="selectedpic">Univerces</label>
+      <label><input class="mx-2" type="radio" value="none" v-model="selectedpic">Univerces</label>
       <label><input class="mx-2" type="radio" value="one" v-model="selectedpic">Breaking Bad</label>
       <label><input class="mx-2" type="radio" value="two" v-model="selectedpic">Dexter</label>
       <label><input class="mx-2" type="radio" value="three" v-model="selectedpic">Game of thrones</label>
