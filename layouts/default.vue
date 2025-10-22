@@ -1,6 +1,6 @@
 <template>
     <body class="nav-color overscroll-none "></body>
-    <header class="bg-gray-950 border-gray-100 flex flex-row w-full relative border-b max-sm:justify-between max-sm:relative">
+    <header class="bg-gray-950 border-gray-100 flex flex-row w-full relative border-b max-sm:justify-between max-sm:relative overscroll-none">
       <!-- Sidebar Starts -->
 
        <!-- sidebar button -->
@@ -39,9 +39,9 @@
         </NuxtLink>
 
         <!-- Lab menu -->
-          <div class="side-butt-mobile mt-2 rounded-xl overflow-hidden max-sm:mx-0 max-sm:border-b max-sm:border-gray-600 max-sm:rounded-none">
+          <div class="side-butt-mobile mt-2 rounded-xl overflow-hidden max-sm:mx-0">
 
-            <div class="relative side-butt flex items-center justify-start gap-3 px-4 py-3 rounded-xl transition-all duration-300 group cursor-pointer select-none"
+            <div class="relative side-butt flex items-center justify-start gap-3 px-4 py-3 rounded-xl transition-all duration-300 group cursor-pointer select-none max-sm:rounded-none max-sm:border-b max-sm:border-gray-600"
                 :class="{'bg-blue-600 shadow-lg scale-[1.02] border-l-4 border-blue-400': submenu, 'hover:bg-gray-800 hover:scale-[1.02] border-l-4 border-transparent': !submenu}"
                 @click="switch_submenu" @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave" role="button" tabindex="0">
               <svg class="w-5 h-5 transition-transform duration-300" :class="{'rotate-90 scale-110': submenu, 'group-hover:scale-110': !submenu}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -57,7 +57,7 @@
             <div class="transition-all duration-500 ease-out overflow-hidden bg-gray-900 bg-opacity-50 select-none"
                 :class="{'max-h-0': !submenu, 'max-h-64': submenu}" @mouseleave="closeWithDelay" @mouseenter="cancelClose" >
               <div class="flex flex-col bg-gray-900 border-gray-600 text-center space-y-1 py-2 px-3" >
-                <NuxtLink to="/lab3" @click="sidebar = false; burger = false" 
+                <NuxtLink to="/lab33" @click="sidebar = false; burger = false" 
                           class="relative group flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-md hover:scale-[1.02] hover:translate-x-2 border-l-2 border-transparent hover:border-blue-300">
                   <div class="w-2 h-2 bg-blue-400 rounded-full transition-transform duration-300 group-hover:scale-150"></div>
                   <span class="font-medium">Lab 3</span>
@@ -75,10 +75,10 @@
                   <span class="font-medium">Lab 5</span>
                   <span class="nav-span rounded-lg"></span>
                 </NuxtLink>
-                <NuxtLink to="/lab6" @click="sidebar = false; burger = false" 
+                <NuxtLink to="/tetris" @click="sidebar = false; burger = false" 
                           class="relative group flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-md hover:scale-[1.02] hover:translate-x-2 border-l-2 border-transparent hover:border-blue-300">
                   <div class="w-2 h-2 bg-blue-400 rounded-full transition-transform duration-300 group-hover:scale-150"></div>
-                  <span class="font-medium">Lab 6</span>
+                  <span class="font-medium">Tetris(BETA)</span>
                   <span class="nav-span rounded-lg"></span>
                 </NuxtLink>
               </div>
@@ -185,7 +185,7 @@
         </div>
     </header>
 
-    <main class="flex-1 text-white bg-gradient-to-tr from-gray-900 justify-center to-gray-900 max-sm:duration-300 max-sm:transition-all min-h-screen transition-all duration-300" :class="{'ml-64': sidebar, 'max-sm:ml-0': !sidebar}">
+    <main class="text-white bg-gray-900 justify-center max-sm:duration-300 max-sm:transition-all min-h-screen transition-all duration-300" :class="{'ml-64': sidebar, 'max-sm:ml-0': !sidebar}">
     <slot/>
     </main>
 

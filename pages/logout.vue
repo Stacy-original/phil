@@ -1,6 +1,6 @@
 <template>
   <div class="account-page">
-    <div class="account-card bg-black border-gray-600">
+    <div class="account-card bg-gray-950 border-gray-600">
       <h1 class="text-white">My account</h1>
       
       <div class="user-info">

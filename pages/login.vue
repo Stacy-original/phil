@@ -1,6 +1,6 @@
 <template>
   <div class="auth-wrapper">
-    <div class="auth-container bg-black border-gray-600">
+    <div class="auth-container bg-gray-950 border-gray-600">
       <h1 class="text-white">Login in system</h1>
       <form @submit.prevent="handleSubmit">
         <div class="input-group">
