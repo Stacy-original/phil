@@ -2,18 +2,35 @@
   <div class="mx-auto bg-gray-900 min-h-screen">
     <div class="mb-6 mx-5 mt-4 p-0.5 rounded-full bg-gray-800 shadow">
       <div class="flex flex-wrap justify-center gap-4">
-        <label v-for="rating in ratings" :key="rating" class="flex flex-row items-center space-x-2 cursor-pointer select-none pl-2 pr-4 py-3 rounded-lg transition-all duration-300 hover:bg-gray-600 hover:shadow-md" role="button">
-          <input 
-            type="radio" 
-            v-model="selectedrating" 
-            :value="rating"
-            class="text-blue-600 focus:ring-blue-500 hidden"
-          >
+        <label v-for="rating in ratings" :key="rating" class="flex flex-row items-center space-x-2 cursor-pointer select-none  rounded-lg transition-all duration-300" role="button"
+        :class="{
+              'bg-gray-600 shadow-md pl-2 pr-4 my-0.5 py-3': selectedrating === rating,
+              'hover:bg-gray-600 hover:shadow-md  pl-2 pr-4 my-1 py-3': selectedrating !== rating
+            }">
+          <input type="radio" v-model="selectedrating" :value="rating" class="text-gray-500 hidden">
           <span class="text-white" v-if="rating=='All'">{{ rating }}</span>
           <span class="text-white" v-if="rating !=='All'">{{ rating }}/10</span>
         </label>
       </div>
     </div>
+          <!-- <div class="mb-6 mx-5 mt-4 p-0.5 rounded-full bg-gray-800 shadow">
+        <div class="flex flex-wrap justify-center gap-4">
+          <label 
+            v-for="rating in ratings" 
+            :key="rating" 
+            class="flex flex-row items-center space-x-2 cursor-pointer select-none pl-2 pr-4 py-3 rounded-lg transition-all duration-300"
+            :class="{
+              'bg-blue-600 shadow-md': selectedrating === rating,
+              'hover:bg-gray-600 hover:shadow-md': selectedrating !== rating
+            }"
+            role="button"
+          >
+            <input type="radio" v-model="selectedrating" :value="rating" class="text-blue-600 focus:ring-blue-500 hidden">
+            <span class="text-white" v-if="rating=='All'">{{ rating }}</span>
+            <span class="text-white" v-if="rating !=='All'">{{ rating }}/10</span>
+          </label>
+        </div>
+      </div> -->
 
     <div class="px-10 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 pb-10 gap-6">
       <div 
@@ -21,17 +38,17 @@
         :key="movie.id"
         class="game-card bg-gray-800 rounded-xl shadow-lg hover:scale-[1.02] overflow-hidden hover:shadow-xl transition-shadow duration-300">
 
-        <div class="w-full h-38 cursor-pointer" @click="toggleDescription(movie.id)">
+        <div class="w-full h-38 cursor-pointer" @click="toggleDescription(movie.id)" @mouseleave="offDescription(movie.id)">
 
           <div v-if="!movie.showDescription" class="image-container h-full">
             <img 
               :src="movie.image" 
               :alt="movie.name"
-              class="w-full h-full object-cover">
+              class="w-full h-[580px] object-cover">
           </div>
           
-          <div v-else class="description-container h-full p-4 bg-gray-700 flex items-center justify-center">
-            <p class="text-sm text-gray-300 leading-relaxed text-center">{{ movie.description }}</p>
+          <div v-else class="description-container h-[580px] p-4 bg-gray-700 flex items-center justify-center">
+            <p class="text-xl text-gray-300 leading-relaxed text-center">{{ movie.description }}</p>
           </div>
         </div>
 
@@ -155,7 +172,18 @@ const movies = reactive([
     genre: 'crime drama',
     description: 'A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family future.',
     showDescription: false
-  }
+  },
+  {
+  id: 11,
+  name: "The Boys",
+  image: "/img/theboys.jpg",
+  releaseYear: '2019',
+  rating: '9',
+  genre: 'superhero satire',
+  description: 'A group of vigilantes sets out to take down corrupt superheroes who abuse their superpowers and fame for their own benefit.',
+  showDescription: false
+}
+
 ])
 
 const selectedGenre = ref('All')
@@ -184,6 +212,12 @@ const toggleDescription = (id: number) => {
   const movie = movies.find(m => m.id === id)
   if (movie) {
     movie.showDescription = !movie.showDescription
+  }
+}
+const offDescription = (id: number) => {
+  const movie = movies.find(m => m.id === id)
+  if (movie) {
+    movie.showDescription = false
   }
 }
 </script>

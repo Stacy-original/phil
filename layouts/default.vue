@@ -193,7 +193,7 @@
   <!-- Mobile overlay when sidebar is open -->
   <div v-if="sidebar" class="fixed inset-0 bg-black bg-opacity-50 z-30 max-sm:block hidden" @click="sidebar = false"></div>
 
-  <main class="text-white bg-gray-900 justify-center max-sm:duration-300 max-sm:transition-all min-h-screen transition-all duration-300 max-sm:pt-2 sm:pt-16" :class="{'ml-64  ': sidebar, 'max-sm:overflow-hidden max-sm:h-screen': sidebar && isMobile}">
+  <main class="text-white bg-gray-900 justify-center max-sm:duration-300 max-sm:transition-all min-h-screen transition-all duration-300 max-sm:pt-2 sm:pt-16" :class="{'ml-64 max-sm:overflow-hidden max-sm:h-screen max-sm:hidden': sidebar}">
     <div class=" mx-auto">
       <slot/>
     </div>
@@ -244,19 +244,7 @@ const switch_submenu = () => {submenu.value = !submenu.value;};
 const switch_sidebar = () => {sidebar.value =!sidebar.value};
 const switch_accountmenu = () => {accountmenu.value=!accountmenu.value}
 
-// Check if mobile on mount and resize
-const checkMobile = () => {
-  isMobile.value = window.innerWidth < 640; // 640px is Tailwind's 'sm' breakpoint
-};
 
-onMounted(() => {
-  checkMobile();
-  window.addEventListener('resize', checkMobile);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('resize', checkMobile);
-});
 
 let closeTimeout: ReturnType<typeof setTimeout> | null = null;
 const closeWithDelayacc = () => {closeTimeout = setTimeout(() => {accountmenu.value = false; }, 400);}; // delay in ms
