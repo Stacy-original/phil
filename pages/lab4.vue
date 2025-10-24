@@ -4,10 +4,20 @@
 
     <div class="flex justify-center mb-8">
         <div class="flex w-full max-w-4xl justify-center ">
-            <video  ref="videoPlayer" controls @error="onVideoError" class="video-element">
+            <!-- <video  ref="videoPlayer" controls @error="onVideoError" class="video-element">
             <source  src='/videos/invincible3x8.webm'>
             
-            </video>
+            </video> -->
+            <iframe 
+                width="100%" 
+                height="400"
+                src="https://www.youtube.com/embed/rbHUhCcSXEM"
+                title="Invincible Season 3 Episode 8"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+                class="video-element"
+            ></iframe>
          </div>
      </div>
   <div class="max-w-4xl mx-auto">

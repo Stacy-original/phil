@@ -15,7 +15,7 @@
     </div>
 
     <div class="px-10 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 pb-10 gap-6">
-      <div v-for="movie in filteredmovies" :key="movie.id"class="game-card bg-gray-800 rounded-xl shadow-lg hover:scale-[1.02] overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <div v-for="movie in filteredmovies" :key="movie.id"class="movie-card bg-gray-800 rounded-xl shadow-lg hover:scale-[1.02] overflow-hidden hover:shadow-xl transition-shadow duration-300">
         <NuxtLink v-if="movie.id === 2" to="/lab4" class="block w-full h-38 cursor-pointer">
           <div class="w-full h-38 cursor-pointer" 
                @mouseenter="playSound(movie.id)" 
@@ -255,12 +255,8 @@ const offDescription = (id: number) => {
   @apply flex flex-col gap-2 border-blue-500 border bg-blue-300 w-72 h-auto items-center hover:border-yellow-500 hover:border-4 hover:bg-yellow-300 rounded-xl;
 }
 
-.game-card {
+.movie-card {
   transition: transform 0.2s ease-in-out;
-}
-
-.game-card:hover {
-  transform: translateY(-5px);
 }
 
 input[type="radio"] {
