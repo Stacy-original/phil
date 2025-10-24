@@ -13,48 +13,47 @@
         </label>
       </div>
     </div>
-          <!-- <div class="mb-6 mx-5 mt-4 p-0.5 rounded-full bg-gray-800 shadow">
-        <div class="flex flex-wrap justify-center gap-4">
-          <label 
-            v-for="rating in ratings" 
-            :key="rating" 
-            class="flex flex-row items-center space-x-2 cursor-pointer select-none pl-2 pr-4 py-3 rounded-lg transition-all duration-300"
-            :class="{
-              'bg-blue-600 shadow-md': selectedrating === rating,
-              'hover:bg-gray-600 hover:shadow-md': selectedrating !== rating
-            }"
-            role="button"
-          >
-            <input type="radio" v-model="selectedrating" :value="rating" class="text-blue-600 focus:ring-blue-500 hidden">
-            <span class="text-white" v-if="rating=='All'">{{ rating }}</span>
-            <span class="text-white" v-if="rating !=='All'">{{ rating }}/10</span>
-          </label>
-        </div>
-      </div> -->
 
     <div class="px-10 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 pb-10 gap-6">
-      <div 
-        v-for="movie in filteredmovies" 
-        :key="movie.id"
-        class="game-card bg-gray-800 rounded-xl shadow-lg hover:scale-[1.02] overflow-hidden hover:shadow-xl transition-shadow duration-300">
+      <div v-for="movie in filteredmovies" :key="movie.id"class="game-card bg-gray-800 rounded-xl shadow-lg hover:scale-[1.02] overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        <NuxtLink v-if="movie.id === 2" to="/lab4" class="block w-full h-38 cursor-pointer">
+          <div class="w-full h-38 cursor-pointer" 
+               @mouseenter="playSound(movie.id)" 
+               @click="toggleDescription(movie.id)" 
+               @mouseleave="offDescription(movie.id)">
 
-        <div class="w-full h-38 cursor-pointer" @click="toggleDescription(movie.id)" @mouseleave="offDescription(movie.id)">
+            <div v-if="!movie.showDescription" class="image-container h-full">
+              <img 
+                :src="movie.image" 
+                :alt="movie.name"
+                class="w-full sm:h-[580px] max-sm:h-[300px] object-cover">
+            </div>
+            
+            <div v-else class="description-container h-[580px] max-sm:h-[300px] p-4 bg-gray-700 flex items-center justify-center">
+              <p class="sm:text-xl max-sm:text-sm text-gray-300 leading-relaxed text-center">{{ movie.description }}</p>
+            </div>
+          </div>
+        </NuxtLink>
+
+        <div v-else class="w-full h-38 cursor-pointer" 
+             @click="toggleDescription(movie.id)" 
+             @mouseleave="offDescription(movie.id)">
 
           <div v-if="!movie.showDescription" class="image-container h-full">
             <img 
               :src="movie.image" 
               :alt="movie.name"
-              class="w-full h-[580px] object-cover">
+              class="w-full h-[580px] max-sm:h-[300px] object-cover">
           </div>
           
-          <div v-else class="description-container h-[580px] p-4 bg-gray-700 flex items-center justify-center">
-            <p class="text-xl text-gray-300 leading-relaxed text-center">{{ movie.description }}</p>
+          <div v-else class="description-container h-[580px] max-sm:h-[300px] p-4 bg-gray-700 flex items-center justify-center">
+            <p class="sm:text-xl max-sm:text-base text-gray-300 leading-relaxed text-center">{{ movie.description }}</p>
           </div>
         </div>
 
         <div class="p-4">
           <h3 class="text-xl font-bold mb-2">{{ movie.name }}</h3>
-          <div class="space-y-1 text-sm">
+          <div class="space-y-1 text-sm max-sm:hidden">
             <p><span class="font-semibold">Genre:</span> {{ movie.genre }}</p>
             <p><span class="font-semibold">Year:</span> {{ movie.releaseYear }}</p>
             <p><span class="font-semibold">Rating:</span> {{ movie.rating }}/10</p>
@@ -66,6 +65,11 @@
     <div v-if="filteredmovies.length === 0" class="text-center py-8">
       <p class="text-xl text-white">Movies are not found</p>
     </div>
+
+    <!-- Hidden audio element for playing sound -->
+    <audio ref="soundElement" preload="auto">
+      <source src="/sound/areyousure.mp3" type="audio/mpeg">
+    </audio>
   </div>
 </template>
 
@@ -85,12 +89,12 @@ const movies = reactive([
   },
   {
     id: 2,
-    name: "House of the Dragon",
-    image: "/img/houseofthedragon.jpg",
-    releaseYear: '2022',
-    rating: '9',
-    genre: 'fantasy drama',
-    description: 'The story of the Targaryen civil war that took place about 200 years before events portrayed in Game of Thrones.',
+    name: "Invincible",
+    image: "/img/invincible.jpg",
+    releaseYear: '2018',
+    rating: '10',
+    genre: 'comic',
+    description: 'Are you sure?',
     showDescription: false
   },
   {
@@ -182,12 +186,22 @@ const movies = reactive([
   genre: 'superhero satire',
   description: 'A group of vigilantes sets out to take down corrupt superheroes who abuse their superpowers and fame for their own benefit.',
   showDescription: false
-}
-
+},
+{
+    id: 12,
+    name: "House of the Dragon",
+    image: "/img/houseofthedragon.jpg",
+    releaseYear: '2022',
+    rating: '9',
+    genre: 'fantasy drama',
+    description: 'The story of the Targaryen civil war that took place about 200 years before events portrayed in Game of Thrones.',
+    showDescription: false
+  },
 ])
 
 const selectedGenre = ref('All')
 const selectedrating = ref('All')
+
 
 const ratings = computed(() => {
   const uniqueRatings = [...new Set(movies.map(movie => movie.rating))]
@@ -207,13 +221,23 @@ const filteredmovies = computed(() => {
   })
 })
 
-// Toggle description view
+const soundElement = ref<HTMLAudioElement | null>(null)
+const playSound = (id: number) => {
+  if (id === 2 && soundElement.value) {
+    soundElement.value.currentTime = 0 
+    soundElement.value.play().catch(error => {
+      console.log('Audio play failed:', error)
+    })
+  }
+}
+
 const toggleDescription = (id: number) => {
   const movie = movies.find(m => m.id === id)
   if (movie) {
     movie.showDescription = !movie.showDescription
   }
 }
+
 const offDescription = (id: number) => {
   const movie = movies.find(m => m.id === id)
   if (movie) {
