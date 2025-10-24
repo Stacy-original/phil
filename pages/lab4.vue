@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen bg-gray-900 text-white p-4">
-    <h1 class="text-2xl font-bold text-center mb-8">Invincible Season 3 Episode 8</h1>
+    <h1 class="text-2xl font-bold text-center mb-8">Invincible Season 3</h1>
 
     <div class="flex justify-center mb-8">
         <div class="flex w-full max-w-4xl justify-center ">
@@ -8,16 +8,9 @@
             <source  src='/videos/invincible3x8.webm'>
             
             </video> -->
-            <iframe 
-                width="100%" 
-                height="400"
-                src="https://www.youtube.com/embed/rbHUhCcSXEM"
-                title="Invincible Season 3 Episode 8"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-                class="video-element"
-            ></iframe>
+            <iframe width="100%" height="400"src="https://www.youtube.com/embed/rbHUhCcSXEM" title="Invincible Season 3 Trailer" frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen class="video-element">
+            </iframe>
          </div>
      </div>
   <div class="max-w-4xl mx-auto">

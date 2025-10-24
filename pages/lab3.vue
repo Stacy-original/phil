@@ -16,38 +16,29 @@
 
     <div class="px-10 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 pb-10 gap-6">
       <div v-for="movie in filteredmovies" :key="movie.id"class="movie-card bg-gray-800 rounded-xl shadow-lg hover:scale-[1.02] overflow-hidden hover:shadow-xl transition-shadow duration-300">
-        <NuxtLink v-if="movie.id === 2" to="/lab4" class="block w-full h-38 cursor-pointer">
-          <div class="w-full h-38 cursor-pointer" 
-               @mouseenter="playSound(movie.id)" 
-               @click="toggleDescription(movie.id)" 
-               @mouseleave="offDescription(movie.id)">
+        <div v-if="movie.id === 2" to="/lab4" class="block w-full h-38 cursor-pointer">
+  <div class="w-full h-38 cursor-pointer" @click="handleMovieClick(movie.id)" @mouseleave="offDescription(movie.id)">
+    <div v-if="!movie.showDescription" class="image-container h-full">
+      <img :src="movie.image" :alt="movie.name" class="w-full sm:h-[580px] max-sm:h-[300px] object-cover">
+    </div>
+    
+    <div v-else class="description-container h-[580px] max-sm:h-[300px] p-4 bg-gray-700 flex flex-col items-center justify-center relative">
+      <p class="sm:text-xl max-sm:text-sm text-gray-300 leading-relaxed text-center mb-6">{{ movie.description }}</p>
+      <NuxtLink to="/lab4" class=" hover:bg-gray-500 bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 ">
+        Are you sure?
+      </NuxtLink>
+    </div>
+  </div>
+</div>
 
-            <div v-if="!movie.showDescription" class="image-container h-full">
-              <img 
-                :src="movie.image" 
-                :alt="movie.name"
-                class="w-full sm:h-[580px] max-sm:h-[300px] object-cover">
-            </div>
-            
-            <div v-else class="description-container h-[580px] max-sm:h-[300px] p-4 bg-gray-700 flex items-center justify-center">
-              <p class="sm:text-xl max-sm:text-sm text-gray-300 leading-relaxed text-center">{{ movie.description }}</p>
-            </div>
-          </div>
-        </NuxtLink>
+        <div v-else class="w-full h-38 cursor-pointer" @click="toggleDescription(movie.id)" @mouseleave="offDescription(movie.id)">
 
-        <div v-else class="w-full h-38 cursor-pointer" 
-             @click="toggleDescription(movie.id)" 
-             @mouseleave="offDescription(movie.id)">
-
-          <div v-if="!movie.showDescription" class="image-container h-full">
-            <img 
-              :src="movie.image" 
-              :alt="movie.name"
-              class="w-full h-[580px] max-sm:h-[300px] object-cover">
+          <div v-if="!movie.showDescription" class=" h-full">
+            <img :src="movie.image" :alt="movie.name"class="w-full h-[580px] max-sm:h-[300px] object-cover">
           </div>
           
           <div v-else class="description-container h-[580px] max-sm:h-[300px] p-4 bg-gray-700 flex items-center justify-center">
-            <p class="sm:text-xl max-sm:text-base text-gray-300 leading-relaxed text-center">{{ movie.description }}</p>
+            <p class="sm:text-xl max-sm:text-sm text-gray-300 leading-relaxed text-center">{{ movie.description }}</p>
           </div>
         </div>
 
@@ -66,7 +57,6 @@
       <p class="text-xl text-white">Movies are not found</p>
     </div>
 
-    <!-- Hidden audio element for playing sound -->
     <audio ref="soundElement" preload="auto">
       <source src="/sound/areyousure.mp3" type="audio/mpeg">
     </audio>
@@ -91,7 +81,7 @@ const movies = reactive([
     id: 2,
     name: "Invincible",
     image: "/img/invincible.jpg",
-    releaseYear: '2018',
+    releaseYear: '2021',
     rating: '10',
     genre: 'comic',
     description: 'Are you sure?',
@@ -221,16 +211,19 @@ const filteredmovies = computed(() => {
   })
 })
 
-const soundElement = ref<HTMLAudioElement | null>(null)
-const playSound = (id: number) => {
-  if (id === 2 && soundElement.value) {
-    soundElement.value.currentTime = 0 
-    soundElement.value.play().catch(error => {
-      console.log('Audio play failed:', error)
-    })
-  }
+const playSound = () => {
+  const audio = new Audio('/sound/areyousure.mp3')
+  audio.play().catch(error => {
+    console.log('Audio play failed:', error)
+  })
 }
 
+const handleMovieClick = (id: number) => {
+  if (id === 2) {
+    playSound()
+  }
+  toggleDescription(id)
+}
 const toggleDescription = (id: number) => {
   const movie = movies.find(m => m.id === id)
   if (movie) {
@@ -259,7 +252,4 @@ const offDescription = (id: number) => {
   transition: transform 0.2s ease-in-out;
 }
 
-input[type="radio"] {
-  @apply w-4 h-4;
-}
 </style>

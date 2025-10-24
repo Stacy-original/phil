@@ -14,7 +14,7 @@
       
       <!-- Sidebar guts -->
       <div v-show="sidebar" class="flex flex-col min-h-[calc(100vh-64px)] top-16 left-0 bg-gray-800 border-gray-100s text-white border-t w-64 sm:fixed text-center transition-all duration-300 ease-in-out max-sm:absolute max-sm:top-16 max-sm:left-0 max-sm:w-full max-sm:h-[calc(100vh-64px)] max-sm:z-40 shadow-xl">
-        <!-- Search Bar - Mobile Version -->
+        <!-- Searchbar-->
         <div class="p-4 border-b border-gray-700 max-sm:block hidden">
           <div class="relative">
             <input 
@@ -124,7 +124,7 @@
       <!-- Sidebar ENDS -->
 
 
-            <!-- Logo Section - Adjusted for better spacing -->
+            <!-- logo-->
       <div class="flex-1 flex items-center justify-start px-8 max-sm:px-4 max-sm:flex-initial select-none">
           <NuxtLink to="/"><img src="assets\images\kasyakbg.png" class="w-32 h-16 transparent "></NuxtLink>
       </div>
@@ -190,7 +190,6 @@
       </div>
   </header>
 
-  <!-- Mobile overlay when sidebar is open -->
   <div v-if="sidebar" class="fixed inset-0 bg-black bg-opacity-50 z-30 max-sm:block hidden" @click="sidebar = false"></div>
 
   <main class="text-white bg-gray-900 justify-center max-sm:duration-300 max-sm:transition-all min-h-screen transition-all duration-300 max-sm:pt-2 sm:pt-16" :class="{'ml-64 max-sm:overflow-hidden max-sm:h-screen max-sm:hidden': sidebar}">
@@ -287,14 +286,5 @@ const handleMouseEnter = () => {cancelClose();openWithDelay();};
   .nav-span {
     @apply absolute inset-0 bg-blue-200 scale-x-0 origin-center transition-transform duration-500 ease-out group-hover:scale-x-100;
   }
-  .account-menu-enter-active,
-  .account-menu-leave-active {
-    transition: all 0.3s ease;
-  }
-
-  .account-menu-enter-from,
-  .account-menu-leave-to {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
+  
 </style>
