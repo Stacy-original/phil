@@ -1,4 +1,5 @@
-<template>
+<template> 
+  <!-- UPDATED VERSION -->
   <body class="overscroll-none bg-gray-900"></body>
   <header class="bg-gray-950 sm:fixed border-gray-100 flex flex-row w-full border-b max-sm:justify-between max-sm:relative overscroll-none z-50">
     <!-- Sidebar Starts -->
