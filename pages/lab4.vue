@@ -1,6 +1,6 @@
 <template>
     <div class="min-h-screen bg-gray-900 text-white p-4">
-    <h1 class="text-2xl font-bold text-center mb-8">Invincible Season 3</h1>
+    <h1 class="text-2xl mt-3 font-bold text-center mb-8">Invincible Season 3 Trailer</h1>
 
     <div class="flex justify-center mb-8">
         <div class="flex w-full max-w-4xl justify-center ">

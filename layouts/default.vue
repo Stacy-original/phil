@@ -1,7 +1,7 @@
 <template> 
   <!-- UPDATED VERSION -->
   <body class="overscroll-none bg-gray-900"></body>
-  <header class="bg-gray-950 sm:fixed border-gray-100 flex flex-row w-full border-b max-sm:justify-between max-sm:relative overscroll-none z-50">
+  <header class="bg-gray-950 sm:fixed border-gray-100 flex flex-row w-full  max-sm:justify-between max-sm:relative overscroll-none z-50">
     <!-- Sidebar Starts -->
 
     <!-- sidebar button -->
@@ -73,13 +73,13 @@
               <NuxtLink to="/lab5" @click="sidebar = false; burger = false" 
                         class="relative group flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-md hover:scale-[1.02] hover:translate-x-2 border-l-2 border-transparent hover:border-blue-300">
                 <div class="w-2 h-2 bg-blue-400 rounded-full transition-transform duration-300 group-hover:scale-150"></div>
-                <span class="font-medium">Lab 5</span>
+                <span class="font-medium">Tic Tac Toe</span>
                 <span class="nav-span rounded-lg"></span>
               </NuxtLink>
               <NuxtLink to="/lab6" @click="sidebar = false; burger = false" 
                         class="relative group flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-md hover:scale-[1.02] hover:translate-x-2 border-l-2 border-transparent hover:border-blue-300">
                 <div class="w-2 h-2 bg-blue-400 rounded-full transition-transform duration-300 group-hover:scale-150"></div>
-                <span class="font-medium">Lab4</span>
+                <span class="font-medium">Flappy Bird</span>
                 <span class="nav-span rounded-lg"></span>
               </NuxtLink>
             </div>
