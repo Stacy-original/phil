@@ -216,7 +216,7 @@ export default {
       if (this.has_moved === false) {
         this.has_moved = true;
       }
-      this.velocity = -6;
+      this.velocity = -8;
       this.playWooshSound();
     },
 
