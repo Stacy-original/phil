@@ -70,13 +70,13 @@
                 <span class="font-medium">Secret</span>
                 <span class="nav-span rounded-lg"></span>
               </NuxtLink>
-              <NuxtLink to="games/ttt" @click="sidebar = false; burger = false" 
+              <NuxtLink to="/games/ttt" @click="sidebar = false; burger = false" 
                         class="relative group flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-md hover:scale-[1.02] hover:translate-x-2 border-l-2 border-transparent hover:border-blue-300">
                 <div class="w-2 h-2 bg-blue-400 rounded-full transition-transform duration-300 group-hover:scale-150"></div>
                 <span class="font-medium">Tic Tac Toe</span>
                 <span class="nav-span rounded-lg"></span>
               </NuxtLink>
-              <NuxtLink to="games/flappybird" @click="sidebar = false; burger = false" 
+              <NuxtLink to="/games/flappybird" @click="sidebar = false; burger = false" 
                         class="relative group flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-300 hover:bg-blue-500 hover:shadow-md hover:scale-[1.02] hover:translate-x-2 border-l-2 border-transparent hover:border-blue-300">
                 <div class="w-2 h-2 bg-blue-400 rounded-full transition-transform duration-300 group-hover:scale-150"></div>
                 <span class="font-medium">Flappy Bird</span>
