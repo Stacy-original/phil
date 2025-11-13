@@ -1,5 +1,5 @@
 <template>
-    <main class=" flex flex-col w-full items-center justify-center">
+    <main class=" flex text-[50px] flex-col w-full items-center justify-center">
         <div>
         Homepage
         </div>

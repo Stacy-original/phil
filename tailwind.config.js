@@ -14,5 +14,10 @@ export default {
     },
   },
   plugins: [],
+  darkMode: 'class', // or 'media'
+  theme: {
+    extend: {},
+  },
+  plugins: [],
 }
 

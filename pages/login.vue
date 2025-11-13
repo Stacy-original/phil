@@ -1,7 +1,7 @@
 <template>
   <div class="auth-wrapper">
-    <div class="auth-container bg-gray-950 border-gray-600">
-      <h1 class="text-white">Login in system</h1>
+    <div class="auth-container dark:bg-gray-950 bg-[#d9c5b2] border-[#b38b6d] dark:border-gray-600">
+      <h1 class="">Login in system</h1>
       <form @submit.prevent="handleSubmit">
         <div class="input-group">
           <label class="text-white">Login:</label>
@@ -10,7 +10,7 @@
             type="text" 
             placeholder="Type your login"
             required
-            class="bg-blue-200 border-gray-600"
+            class="bg-[#e7d7c1] text-[#4b2e05] placeholder-[#7b4b26] border-[#b38b6d] dark:bg-blue-200 dark:border-gray-600"
           >
         </div>
         <div class="input-group">
@@ -20,10 +20,10 @@
             type="password" 
             placeholder="Type your password"
             required
-            class="bg-blue-200 border-gray-600"
+            class="bg-[#e7d7c1] text-[#4b2e05] placeholder-[#7b4b26] border-[#b38b6d] dark:bg-blue-200 dark:border-gray-600"
           >
         </div>
-        <button type="submit" class="bg-blue-200 border-gray-600">Sign In</button>
+        <button type="submit" class="bg-[#e7d7c1] text-[#4b2e05] placeholder-[#7b4b26] border-[#b38b6d] dark:bg-blue-200 dark:border-gray-600">Sign In</button>
       </form>
     </div>
   </div>

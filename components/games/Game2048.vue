@@ -707,11 +707,10 @@ h1.title {
   background: #8f7a66;
   padding: 15px 25px;
   font-size: 25px;
-  height: 25px;
+  height: 60px;
   line-height: 47px;
   font-weight: bold;
   border-radius: 3px;
-  color: white;
   margin-top: 8px;
   text-align: center;
 }

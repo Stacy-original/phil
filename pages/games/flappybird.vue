@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row justify-center text-4xl md:text-5xl font-bold text-white mt-8">Flappy Javascript</div>
+    <div class="flex flex-row justify-center text-4xl md:text-5xl font-bold  mt-8">Flappy Javascript</div>
     <div class="game-container">
         <canvas 
         ref="board" 
@@ -301,14 +301,12 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #111827;
 }
 
 #board {
   background-color: green;
   border: 2px solid #333;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 body {

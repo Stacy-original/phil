@@ -1,6 +1,6 @@
 <template>
   <div class="account-page">
-    <div class="account-card bg-gray-950 border-gray-600">
+    <div class="account-card dark:bg-gray-950 bg-[#d9c5b2] border-[#b38b6d] dark:border-gray-600 dark:border-gray-600">
       <h1 class="text-white">My account</h1>
       
       <div class="user-info">
@@ -8,11 +8,11 @@
           <i class="fas fa-user-circle"></i>
         </div>
         <h2 class="text-white">{{ userName }}</h2>
-        <p class="text-blue-200">{{ userEmail }}</p>
+        <p class="dark:text-blue-200 text-blue-600">{{ userEmail }}</p>
       </div>
 
       <div class="account-actions">
-        <button @click="logout" class="logout-btn bg-blue-200 border-gray-600 text-black">
+        <button @click="logout" class="logout-btn bg-[#e7d7c1] text-[#4b2e05] placeholder-[#7b4b26] border-[#b38b6d] dark:bg-blue-200 dark:border-gray-600 text-black">
           <i class="fas fa-sign-out-alt"></i> Log Out
         </button>
       </div>

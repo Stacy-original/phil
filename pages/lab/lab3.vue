@@ -1,49 +1,65 @@
 <template>
-  <div class="mx-auto bg-gray-900 min-h-screen">
-    <div class="mb-6 mx-5 mt-4 p-0.5 rounded-full bg-gray-800 shadow">
+  <div class="mx-auto bg-[#f5efe6] dark:bg-gray-900 min-h-screen transition-colors duration-300">
+    <!-- Rating filter bar -->
+    <div class="mb-6 mx-5 mt-4 p-0.5 rounded-full bg-[#d7c2a3] dark:bg-gray-800 shadow">
       <div class="flex flex-wrap justify-center gap-4">
-        <label v-for="rating in ratings" :key="rating" class="flex flex-row items-center space-x-2 cursor-pointer select-none  rounded-lg transition-all duration-300" role="button"
-        :class="{
-              'bg-gray-600 shadow-md pl-2 pr-4 my-0.5 py-3': selectedrating === rating,
-              'hover:bg-gray-600 hover:shadow-md  pl-2 pr-4 my-1 py-3': selectedrating !== rating
-            }">
-          <input type="radio" v-model="selectedrating" :value="rating" class="text-gray-500 hidden">
-          <span class="text-white" v-if="rating=='All'">{{ rating }}</span>
-          <span class="text-white" v-if="rating !=='All'">{{ rating }}/10</span>
+        <label
+          v-for="rating in ratings"
+          :key="rating"
+          class="flex flex-row items-center space-x-2 cursor-pointer select-none rounded-lg transition-all duration-300"
+          :class="{
+            'bg-[#b89f80] dark:bg-gray-700 shadow-md pl-2 pr-4 my-0.5 py-3 text-white': selectedrating === rating,
+            'hover:bg-[#b89f80]/60 dark:hover:bg-gray-700 hover:shadow-md pl-2 pr-4 my-1 py-3 text-[#3b2f2f] dark:text-white': selectedrating !== rating
+          }"
+        >
+          <input type="radio" v-model="selectedrating" :value="rating" class="hidden" />
+          <span v-if="rating === 'All'">{{ rating }}</span>
+          <span v-else>{{ rating }}/10</span>
         </label>
       </div>
     </div>
 
+    <!-- Movie grid -->
     <div class="px-10 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 pb-10 gap-6">
-      <div v-for="movie in filteredmovies" :key="movie.id"class="movie-card bg-gray-800 rounded-xl shadow-lg hover:scale-[1.02] overflow-hidden hover:shadow-xl transition-shadow duration-300">
-        <div v-if="movie.id === 2" to="/lab4" class="block w-full h-38 cursor-pointer">
-  <div class="w-full h-38 cursor-pointer" @click="handleMovieClick(movie.id)" @mouseleave="offDescription(movie.id)">
-    <div v-if="!movie.showDescription" class="image-container h-full">
-      <img :src="movie.image" :alt="movie.name" class="w-full sm:h-[580px] max-sm:h-[300px] object-cover">
-    </div>
-    
-    <div v-else class="description-container h-[580px] max-sm:h-[300px] p-4 bg-gray-700 flex flex-col items-center justify-center relative">
-      <p class="sm:text-xl max-sm:text-sm text-gray-300 leading-relaxed text-center mb-6">{{ movie.description }}</p>
-      <NuxtLink to="/lab4" class=" hover:bg-gray-500 bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300 ">
-        Are you sure?
-      </NuxtLink>
-    </div>
-  </div>
-</div>
+      <div
+        v-for="movie in filteredmovies"
+        :key="movie.id"
+        class="movie-card bg-[#e9dcc5] dark:bg-gray-800 rounded-xl shadow-lg hover:scale-[1.02] overflow-hidden hover:shadow-xl transition-shadow duration-300 text-[#3b2f2f] dark:text-white"
+      >
+        <!-- Special Invincible card -->
+        <div v-if="movie.id === 2" class="block w-full h-38 cursor-pointer">
+          <div class="w-full h-38 cursor-pointer" @click="handleMovieClick(movie.id)" @mouseleave="offDescription(movie.id)">
+            <div v-if="!movie.showDescription" class="image-container h-full">
+              <img :src="movie.image" :alt="movie.name" class="w-full sm:h-[580px] max-sm:h-[300px] object-cover" />
+            </div>
 
-        <div v-else class="w-full h-38 cursor-pointer" @click="toggleDescription(movie.id)" @mouseleave="offDescription(movie.id)">
-
-          <div v-if="!movie.showDescription" class=" h-full">
-            <img :src="movie.image" :alt="movie.name"class="w-full h-[580px] max-sm:h-[300px] object-cover">
+            <div v-else class="description-container h-[580px] max-sm:h-[300px] p-4 bg-[#c8b69e] dark:bg-gray-700 flex flex-col items-center justify-center relative">
+              <p class="sm:text-xl max-sm:text-sm text-[#3b2f2f] dark:text-gray-300 leading-relaxed text-center mb-6">
+                {{ movie.description }}
+              </p>
+              <NuxtLink
+                to="/lab4"
+                class="hover:bg-[#a3835e] bg-[#b5956d] dark:hover:bg-gray-600 dark:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300"
+              >
+                Are you sure?
+              </NuxtLink>
+            </div>
           </div>
-          
-          <div v-else class="description-container h-[580px] max-sm:h-[300px] p-4 bg-gray-700 flex items-center justify-center">
-            <p class="sm:text-xl max-sm:text-sm text-gray-300 leading-relaxed text-center">{{ movie.description }}</p>
+        </div>
+
+        <!-- Normal cards -->
+        <div v-else class="w-full h-38 cursor-pointer" @click="toggleDescription(movie.id)" @mouseleave="offDescription(movie.id)">
+          <div v-if="!movie.showDescription" class="h-full">
+            <img :src="movie.image" :alt="movie.name" class="w-full h-[580px] max-sm:h-[300px] object-cover" />
+          </div>
+
+          <div v-else class="description-container h-[580px] max-sm:h-[300px] p-4 bg-[#c8b69e] dark:bg-gray-700 flex items-center justify-center">
+            <p class="sm:text-xl max-sm:text-sm text-[#3b2f2f] dark:text-gray-300 leading-relaxed text-center">{{ movie.description }}</p>
           </div>
         </div>
 
         <div class="p-4">
-          <h3 class="text-xl font-bold mb-2">{{ movie.name }}</h3>
+          <h3 class="text-xl font-bold mb-2 text-[#3b2f2f] dark:text-white">{{ movie.name }}</h3>
           <div class="space-y-1 text-sm max-sm:hidden">
             <p><span class="font-semibold">Genre:</span> {{ movie.genre }}</p>
             <p><span class="font-semibold">Year:</span> {{ movie.releaseYear }}</p>
@@ -53,18 +69,26 @@
       </div>
     </div>
 
+    <!-- No results -->
     <div v-if="filteredmovies.length === 0" class="text-center py-8">
-      <p class="text-xl text-white">Movies are not found</p>
+      <p class="text-xl text-[#3b2f2f] dark:text-white">Movies are not found</p>
     </div>
 
     <audio ref="soundElement" preload="auto">
-      <source src="/sound/areyousure.mp3" type="audio/mpeg">
+      <source src="/sound/areyousure.mp3" type="audio/mpeg" />
     </audio>
   </div>
 </template>
 
+
 <script setup lang="ts">
 import { reactive, ref, computed } from 'vue';
+
+const colorMode = useColorMode();
+
+function toggleTheme() {
+  colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
+}
 
 const movies = reactive([
   {

@@ -3,6 +3,12 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss', '@nuxtjs/color-mode'],
+   colorMode: {
+    classSuffix: '', // makes it use 'dark' instead of 'dark-mode'
+    preference: 'system', // default theme
+    fallback: 'light', // fallback when preference not available
+    storageKey: 'nuxt-color-mode', // localStorage key
+  },
   app: {
     head: {
       title: 'KASYAK WEB',
