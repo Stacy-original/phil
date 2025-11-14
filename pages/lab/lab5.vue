@@ -1,6 +1,6 @@
 <template>
   <main class="flex h-screen">
-    <div class="flex flex-col m-auto gap-2 text-white">
+    <div class="flex flex-col m-auto gap-2">
       <p class="text-[50px] flex justify-center mb-5">Antarctica</p>
       <img src="/img/pinguins.jpg" class="w-86 h-80 rounded-xl">
       <p>T in degree: {{ temp }}</p>
@@ -10,7 +10,7 @@
       <!-- Debug Button -->
       <button 
         @click="showDebug = !showDebug" 
-        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors mt-4"
+        class="px-4 py-2 bg-blue-600 rounded hover:bg-blue-700 transition-colors mt-4"
       >
         {{ showDebug ? 'Hide Debug' : 'Show Debug' }}
       </button>

@@ -1,23 +1,23 @@
 <template>
-  <div class="min-h-screen bg-gray-900 flex flex-col items-center justify-center p-4">
+  <div class="min-h-screen flex flex-col items-center justify-center p-4">
     <div 
       class="flex flex-col items-center justify-center space-y-6 transition-all duration-300"
       :class="showMessage ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none h-0 overflow-hidden'"
     >
-      <p class="text-4xl md:text-6xl font-bold text-white" id="message">
+      <p class="text-4xl md:text-6xl font-bold " id="message">
         {{ message }}
       </p>
       <button 
         id="new-game"
         @click="resetGame"
-        class="px-8 py-4 bg-gray-800 text-white text-xl rounded-2xl hover:bg-gray-700 transition-colors duration-200 shadow-lg"
+        class="px-8 py-4 dark:bg-gray-800 bg-[#d9c5b2] text-xl rounded-2xl hover:bg-[#7b4b26] dark:hover:bg-gray-700 transition-colors duration-200 shadow-lg"
       >
         New Game
       </button>
     </div>
     
     <main class="text-center w-full max-w-2xl">
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-8 mt-4">
+      <h1 class="text-4xl md:text-5xl font-bold mb-8 mt-4">
         Tic Tac Toe
       </h1>
       

@@ -111,7 +111,7 @@
         <div
           class="relative ml-2 mr-2 h-12 text-center text-xl pt-2 p-2 flex items-center justify-start gap-3 px-4 py-3 rounded-xl transition-all duration-300 group cursor-pointer select-none border-l-4
           dark:hover:bg-gray-800 dark:border-transparent dark:hover:border-blue-400
-          hover:bg-[#c9ad92] hover:text-[#3a2a1a] hover:border-[#a1744c]"
+          hover:bg-[#c9ad92] dark:hover-text-white hover:border-[#a1744c]"
           :class="{
             'dark:bg-blue-600 dark:shadow-lg dark:scale-[1.02] dark:border-blue-400': submenu,
             'bg-[#b38b6d] bg-opacity-40 scale-[1.02] border-[#a1744c]': submenu && colorMode.value === 'light',
@@ -186,7 +186,7 @@
           to="/login"
           @click="closeSidebar"
           class="ml-2 mr-2 h-12 text-center text-xl pt-2 p-2 flex items-center justify-start gap-3 px-4 py-3 rounded-xl transition-all duration-300 group border-l-4 border-transparent
-          dark:hover:bg-green-600 dark:hover:border-green-400
+          dark:hover:bg-blue-600 dark:hover:border-green-400
           hover:bg-[#b38b6d] hover:text-[#3a2a1a] hover:border-[#8d6548]"
         >
           <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -199,7 +199,7 @@
           to="/logout"
           @click="closeSidebar"
           class="ml-2 mr-2 h-12 text-center text-xl pt-2 p-2 flex items-center justify-start gap-3 px-4 py-3 rounded-xl transition-all duration-300 group border-l-4 border-transparent
-          dark:hover:bg-red-600 dark:hover:border-red-400
+          dark:hover:bg-blue-600 dark:hover:border-red-400
           hover:bg-[#b38b6d] hover:text-[#3a2a1a] hover:border-[#8d6548]"
         >
           <svg class="w-5 h-5 transition-transform duration-300 group-hover:scale-110" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -238,9 +238,7 @@
 <script setup lang="ts">
 const colorMode = useColorMode();
 
-function toggleTheme() {
-  colorMode.preference = colorMode.value === "dark" ? "light" : "dark";
-}
+
 
 const props = defineProps<{ sidebar: boolean }>();
 const emit = defineEmits<{ "update:sidebar": [value: boolean]; "close-sidebar": [] }>();

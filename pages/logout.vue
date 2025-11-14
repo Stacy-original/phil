@@ -1,13 +1,13 @@
 <template>
   <div class="account-page">
     <div class="account-card dark:bg-gray-950 bg-[#d9c5b2] border-[#b38b6d] dark:border-gray-600 dark:border-gray-600">
-      <h1 class="text-white">My account</h1>
+      <h1 class="">My account</h1>
       
       <div class="user-info">
         <div class="avatar text-blue-200">
           <i class="fas fa-user-circle"></i>
         </div>
-        <h2 class="text-white">{{ userName }}</h2>
+        <h2 class="">{{ userName }}</h2>
         <p class="dark:text-blue-200 text-blue-600">{{ userEmail }}</p>
       </div>
 

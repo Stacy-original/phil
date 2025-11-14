@@ -1,75 +1,37 @@
 <template>
   <div class="overscroll-none font-sans transition-colors duration-300">
     <!-- HEADER -->
-    <header
-      class="sm:fixed flex flex-row w-full max-sm:justify-between max-sm:relative overscroll-none z-50
-      dark:bg-gray-950 bg-[#d9c5b2] border-b border-[#b38b6d] dark:border-gray-800"
-    >
+    <header class="sm:fixed flex flex-row w-full max-sm:justify-between max-sm:relative overscroll-none z-50 dark:bg-gray-950 bg-[#d9c5b2] border-b border-[#b38b6d] dark:border-gray-800">
       <!-- Sidebar Component -->
-      <DefaultSidebar
-        :sidebar="sidebar"
-        @update:sidebar="sidebar = $event"
-        @close-sidebar="sidebar = false"
-      />
+      <DefaultSidebar :sidebar="sidebar" @update:sidebar="sidebar = $event" @close-sidebar="sidebar = false"/>
 
       <!-- Logo -->
       <div class="flex-1 flex items-center justify-start px-8 max-sm:px-4 max-sm:flex-initial select-none">
-        <NuxtLink to="/">
-          <img src="/assets/images/kasyakbg.png" class="w-32 h-16" />
-        </NuxtLink>
+        <NuxtLink to="/"><img src="/assets/images/kasyakbg.png" class="w-32 h-16" /></NuxtLink>
       </div>
 
       <!-- Search Bar Desktop -->
       <div class="flex-1 mt-2.5 flex justify-center max-sm:hidden">
         <div class="max-w-md w-full">
           <div class="relative">
-            <input
-              type="text"
-              placeholder="Search..."
-              class="w-full px-4 py-2 pl-10 rounded-lg border focus:outline-none focus:ring-2
-              dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:border-gray-700 focus:ring-gray-200
-              bg-[#e7d7c1] text-[#4b2e05] placeholder-[#7b4b26] border-[#b38b6d]"
-            />
-            <svg
-              class="absolute left-3 top-2.5 w-4 h-4 text-gray-500 dark:text-gray-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
+            <input type="text" placeholder="Search..."
+              class="w-full px-4 py-2 pl-10 rounded-lg border focus:outline-none focus:ring-2 dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:border-gray-700 focus:ring-gray-200 bg-[#e7d7c1] text-[#4b2e05] placeholder-[#7b4b26] border-[#b38b6d]"/>
+            <svg class="absolute left-3 top-2.5 w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
           </div>
         </div>
       </div>
 
       <!-- Account Button + Menu -->
-      <div
-        class="flex-1 flex mr-5 justify-end items-center pr-4 max-sm:pr-2 relative gap-2"
-        @mouseleave="closeWithDelayacc"
-        @mouseenter="cancelClose"
-      >
+      <div class="flex-1 flex mr-5 justify-end items-center pr-4 max-sm:pr-2 relative gap-2" @mouseleave="closeWithDelayacc" @mouseenter="cancelClose">
         <!-- Account Button -->
-        <div
-          class="self-center rounded-full hover:bg-gray-500 w-12 h-12 hover:bg-opacity-20 transition-colors duration-200 flex items-center justify-center select-none"
-          role="button"
-          tabindex="0"
-          @click="switch_accountmenu"
-        >
+        <div class="self-center rounded-full hover:bg-gray-500 w-12 h-12 hover:bg-opacity-20 transition-colors duration-200 flex items-center justify-center select-none" role="button" tabindex="0" @click="switch_accountmenu">
           <img src="/assets/images/user.png" class="w-8 h-8 rounded-full" alt="Account" />
         </div>
 
         <!-- Account Menu -->
-        <div
-          v-show="accountmenu"
-          class="absolute top-16 mt-0.5 right-4 w-64 rounded-lg shadow-xl z-50 border
-          dark:bg-gray-800 dark:border-gray-700 dark:text-white
-          bg-[#f2e6d8] border-[#b38b6d] text-[#3a2a1a]"
-        >
+        <div v-show="accountmenu" class="absolute top-16 mt-0.5 right-4 w-64 rounded-lg shadow-xl z-50 border dark:bg-gray-800 dark:border-gray-700 dark:text-white bg-[#f2e6d8] border-[#b38b6d] text-[#3a2a1a]">
           <div class="p-4 font-medium border-b dark:border-gray-700 border-[#b38b6d]">
             Account Menu
           </div>
@@ -79,10 +41,7 @@
             <li class="px-4 py-2 hover:bg-[#e7d7c1] dark:hover:bg-gray-700 cursor-pointer">Logout</li>
 
             <!-- Theme Toggle (moved here) -->
-            <li
-              class="px-4 py-2 flex items-center justify-between hover:bg-[#e7d7c1] dark:hover:bg-gray-700 cursor-pointer border-t dark:border-gray-700 border-[#b38b6d]"
-              @click="toggleTheme"
-            >
+            <li class="px-4 py-2 flex items-center justify-between hover:bg-[#e7d7c1] dark:hover:bg-gray-700 cursor-pointer border-t dark:border-gray-700 border-[#b38b6d]" @click="toggleTheme">
               <span>Theme</span>
               <span class="text-xl">
                 <span v-if="colorMode.value === 'dark'">☀️</span>
